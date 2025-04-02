@@ -1,0 +1,9 @@
+omogucuje setovanje flagova i dobivanje flagove
+  za file deskriptore
+
+prima broj fd, drugi parametar cmd:
+  f_dupfd (duplicate file deskriptor)
+
+fflush(stdout) cisecnje stdout
+
+uvijek najmanji moguci slobodni FD
