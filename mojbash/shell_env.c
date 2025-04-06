@@ -1,6 +1,5 @@
 #include "inc/shell_env.h"
 #include "inc/error.h"
-#include <bits/posix1_lim.h>
 #include <limits.h>
 #include <linux/limits.h>
 #include <stdio.h>
