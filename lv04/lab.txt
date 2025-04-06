@@ -1,0 +1,3 @@
+stty tostop
+
+fg prebacuje program u foreground stanje
