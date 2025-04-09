@@ -36,14 +36,16 @@ int main(int argc, char *argv[]) {
     char *cmd = tokens[0];
 
     if (strcmp(cmd, CMD_EXIT) == 0) {
-      if (num_tokens > 2)
+      free(tokens);
+      if (num_tokens > 2) {
         fprintf(stderr, "exit: too many arguments\n");
-      else
+      } else
         break;
     }
 
     if (!is_valid(cmd)) {
       fprintf(stderr, "mojbash: command not found: %s\n", cmd);
+      free(tokens);
       continue;
     }
 
@@ -57,10 +59,10 @@ int main(int argc, char *argv[]) {
     } else {
       int status;
       waitpid(cpid, &status, 0);
+      free(tokens);
     }
   }
 
-  free(tokens);
   free_env(env);
 
   return EXIT_SUCCESS;

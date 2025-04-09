@@ -1,5 +1,5 @@
 CXX      := clang
-CXXFLAGS := -Wall
+CXXFLAGS := -Wall -fsanitize=address
 LDFLAGS  := -L /usr/lib -lm
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/obj

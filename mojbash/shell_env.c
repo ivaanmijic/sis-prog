@@ -49,13 +49,12 @@ char *retrieve_hostname() {
 }
 
 void display_prompt(ShellEnv *env) {
-  char *path = malloc(PATH_MAX);
+  char path[PATH_MAX];
   format_path(env->cwd, env->home_dir, path);
 
   char buff[BUFFSIZE];
   sprintf(buff, "\033[32m%s@%s:\033[36m%s\033[0m$", env->username,
           env->hostname, path);
-  free(path);
 
   int nbytes = strlen(buff);
 

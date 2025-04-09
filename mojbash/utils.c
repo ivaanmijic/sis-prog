@@ -6,34 +6,35 @@
 #include <fcntl.h>
 #include <stddef.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
+#include <time.h>
 #include <unistd.h>
 
 #define FILESIZE 64
 #define BUFFSIZE 512
 
-Command commands[] = {{CMD_ECHO, mojecho},
-                      {CMD_CAT, mojcat},
-                      {CMD_TOUCH, mojtouch},
-                      {CMD_LS, mojls}};
+Command commands[] = {{programe_ECHO, mojecho},
+                      {programe_CAT, mojcat},
+                      {programe_TOUCH, mojtouch},
+                      {programe_LS, mojls}};
 
-void execute(const char *cmd, char **args, int num_args) {
+void execute(const char *programe, char **args, int num_args) {
   int num_commands = sizeof(commands) / sizeof(commands[0]);
   for (int i = 0; i < num_commands; ++i) {
-    if (strcmp(cmd, commands[i].name) == 0) {
+    if (strcmp(programe, commands[i].name) == 0) {
 
       int fd_in, fd_out;
       char inputFile[FILESIZE] = {0}, outputFile[FILESIZE] = {0};
       int inputRedirect = 0, outputRedirect = 0;
 
       for (int i = 0; i < num_args; i++) {
-        if (strcmp(args[i], "<") == 0 && args[i + 1] != NULL) {
+        if (strcmp(args[i], "<") == 0 && i + 1 < num_args && args[i + 1]) {
           strncpy(inputFile, args[i + 1], FILESIZE - 1);
           args[i] = args[i + 1] = "";
           inputRedirect = 1;
         }
-        if (strcmp(args[i], ">") == 0 && args[i + 1] != NULL) {
+        if (strcmp(args[i], ">") == 0 && i + 1 < num_args && args[i + 1]) {
           strncpy(outputFile, args[i + 1], FILESIZE - 1);
           args[i] = args[i + 1] = "";
           outputRedirect = 1;
@@ -77,25 +78,72 @@ void mojecho(char **args, int num_args) {
 }
 
 void mojcat(char **args, int num_args) {
+  char buffer[BUFFSIZE];
+  const char *progname = "mojcat";
+
   for (int i = 0; i < num_args; ++i) {
-    if (strlen(args[i]) == 0)
+    char *fname = args[i];
+    if (fname[0] == '\0')
       continue;
-    int fd = open(args[i], O_RDONLY);
-    if (fd < 0 && errno == ENOENT) {
-      fprintf(stderr, "mojcat: %s: No such file or directory\n", args[0]);
+
+    int fd = open(fname, O_RDONLY);
+    if (fd < 0) {
+      if (errno == ENOENT)
+        print_error(progname, fname, "No such file or directoru");
+      else if (errno == EISDIR)
+        print_error(progname, fname, "Is a directory");
+      else
+        print_error(progname, fname, strerror(errno));
+      continue;
+    }
+
+    ssize_t nread;
+    while ((nread = read(fd, buffer, BUFFSIZE)) > 0) {
+      if (write(STDOUT_FILENO, buffer, nread) < 0) {
+        print_error(progname, "write", strerror(errno));
+        break;
+      }
+    }
+    if (nread < 0) {
+      print_error(progname, fname, strerror(errno));
+    }
+
+    close(fd);
+  }
+}
+
+void mojtouch(char **args, int num_args) {
+  for (int i = 0; i < num_args; ++i) {
+    const char *path = args[i];
+    if (path[0] == '\0')
+      continue;
+
+    int fd = open(path, O_CREAT | O_EXCL, 0666);
+    if (fd >= 0) {
+      close(fd);
+      continue;
+    }
+
+    if (errno == EEXIST) {
+      fd = open(path, O_WRONLY);
+      if (fd < 0) {
+        fprintf(stderr, "touch: cannot open '%s' for writing: %s\n", path,
+                strerror(errno));
+        continue;
+      }
+      struct timespec times[2];
+      times[0].tv_nsec = UTIME_NOW;
+      times[1].tv_nsec = UTIME_OMIT;
+
+      if (futimens(fd, times) < 0) {
+        fprintf(stderr, "touch: cannot update times on '%s': %s\n", path,
+                strerror(errno));
+      }
+      close(fd);
     } else {
-      int n;
-      char read_buff[BUFFSIZE];
-      while ((n = read(fd, read_buff, BUFFSIZE)) > 0) {
-        write(STDOUT_FILENO, read_buff, n);
-      }
-      if (n < 0 && errno == EISDIR) {
-        fprintf(stderr, "cat: %s: Is a directory\n", args[i]);
-      } else if (n < 0) {
-        fprintf(stderr, "cat error: %d", errno);
-      }
+      fprintf(stderr, "touch: cannot create '%s': %s\n", path, strerror(errno));
     }
   }
 }
-void mojtouch(char **args, int num_args) {}
+
 void mojls(char **args, int num_args) {}
