@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
-#include "inc/cmd_parser.h"
+#include "inc/constants.h"
 #include "inc/error.h"
+#include "inc/scanner.h"
 #include "inc/shell_env.h"
+#include "inc/utils.h"
 
 #define MAX_LINE 1024
 
@@ -16,26 +20,47 @@ int main(int argc, char *argv[]) {
 
   ShellEnv *env = new_env();
   char buff[MAX_LINE];
+  char **tokens = NULL;
 
   while (1) {
     display_prompt(env);
     fgets(buff, MAX_LINE, stdin);
 
     int num_tokens = 0;
-    char **tokens = tokenize(buff, &num_tokens);
+    tokens = tokenize(buff, &num_tokens);
     if (num_tokens == 0) {
       free(tokens);
       continue;
     }
 
-    if (strcmp(tokens[0], "exit") == 0) {
+    char *cmd = tokens[0];
+
+    if (strcmp(cmd, CMD_EXIT) == 0) {
+      if (num_tokens > 2)
+        fprintf(stderr, "exit: too many arguments\n");
+      else
+        break;
+    }
+
+    if (!is_valid(cmd)) {
+      fprintf(stderr, "mojbash: command not found: %s\n", cmd);
+      continue;
+    }
+
+    char **args = tokens + 1;
+    int num_args = num_tokens - 1;
+
+    pid_t cpid = fork();
+    if (cpid == 0) {
+      execute(cmd, args, num_args);
       exit(EXIT_SUCCESS);
-    } else if (strcmp(tokens[0], "mojcat") == 0) {
     } else {
-      fprintf(stderr, "mojbash: command not found: %s\n", tokens[0]);
+      int status;
+      waitpid(cpid, &status, 0);
     }
   }
 
+  free(tokens);
   free_env(env);
 
   return EXIT_SUCCESS;

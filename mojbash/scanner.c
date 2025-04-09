@@ -1,4 +1,5 @@
-#include "inc/cmd_parser.h"
+#include "inc/scanner.h"
+#include "inc/constants.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -23,6 +24,13 @@ char **tokenize(char *buffer, int *num_tokens) {
     (*num_tokens)++;
     token = strtok(NULL, whitespace);
   }
-
   return tokens;
+}
+
+int is_valid(const char *cmd) {
+  if (strcmp(cmd, CMD_ECHO) == 0 || strcmp(cmd, CMD_CAT) == 0 ||
+      strcmp(cmd, CMD_TOUCH) == 0 || strcmp(cmd, CMD_LS) == 0) {
+    return 1;
+  }
+  return 0;
 }

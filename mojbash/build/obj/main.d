@@ -1,1 +1,2 @@
-build/obj/./main.o: main.c inc/error.h inc/shell_env.h inc/cmd_parser.h
+build/obj/./main.o: main.c inc/constants.h inc/error.h inc/scanner.h \
+  inc/shell_env.h inc/utils.h
