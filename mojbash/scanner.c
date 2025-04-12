@@ -9,21 +9,30 @@ char **tokenize(char *buffer, int *num_tokens) {
   const char *whitespace = " \t\n\f\r\v";
 
   int capacity = INITIAL_TOKEN_CAPACITY;
+
   char **tokens = malloc(capacity * sizeof(char *));
+  if (tokens == NULL) {
+    return NULL;
+  }
 
   *num_tokens = 0;
-
   char *token = strtok(buffer, whitespace);
   while (token != NULL) {
-    if (*num_tokens >= capacity) {
+    if (*num_tokens >= capacity - 1) {
       capacity *= 2;
-      tokens = realloc(tokens, capacity * sizeof(char *));
+      char **temp = realloc(tokens, capacity * sizeof(char *));
+      if (temp == NULL) {
+        free(tokens);
+        return NULL;
+      }
+      tokens = temp;
     }
 
     tokens[*num_tokens] = token;
     (*num_tokens)++;
     token = strtok(NULL, whitespace);
   }
+  tokens[*num_tokens] = NULL;
   return tokens;
 }
 
