@@ -1,6 +1,0 @@
-chmod u-w -R subdir
-  -> -R svim inodima rekurzivno ce oduzeti write flag
-
-sticky bit:
-  kontorlni bit za folder koji onemogucuje brisanje bilo cega u foldreru:wq
-

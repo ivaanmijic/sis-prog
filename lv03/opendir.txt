@@ -1,8 +1,0 @@
-opendir
-
-uzima path i vraca DIR*
-struktura koja sadrzi dva clana (dirent)
-broj inoda i ime
-
-stat - sve informacije o file-u
-       snima u buffer
