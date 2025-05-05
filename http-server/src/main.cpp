@@ -1,10 +1,16 @@
-#include "../include/logger.h"
+#include "../include/error.h"
+#include "../include/port.h"
 #include "../include/utils.h"
-#include <iostream>
 #include <string>
 #include <unistd.h>
 
 int main(int argc, char *argv[]) {
-  if (!isValidPort(argv[1]))
-    fatal("Invalid port number");
+  try {
+    std::string portArg(validateArgs(argc, argv));
+    Port port(portArg);
+  } catch (const Error::Port &e) {
+    fatal(e.what());
+  } catch (const Error::Arg &e) {
+    fatal(e.what());
+  }
 }

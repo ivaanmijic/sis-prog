@@ -1,7 +1,7 @@
 #include "../include/utils.h"
+#include "../include/error.h"
 #include <cstdlib>
 #include <iostream>
-#include <regex>
 #include <string>
 
 [[noreturn]] void fatal(const std::string &msg) {
@@ -10,10 +10,18 @@
   std::exit(EXIT_FAILURE);
 }
 
-bool isValidPort(const std::string &s) {
-  static const std::regex portRx{R"([0-9]{1,5})"};
-  if (!std::regex_match(s, portRx))
-    return false;
-  int port = std::stoi(s);
-  return port >= 0 && port <= 65535;
+std::string validateArgs(int argc, char **argv) {
+  if (argc < 2) {
+    throw Error::Arg("Error: missing port argument.\n"
+                     "Usage: " +
+                     std::string(argv[0]) + " <port>");
+  }
+
+  if (argc > 2) {
+    throw Error::Arg("Error: too many arguments\n"
+                     "Usage: " +
+                     std::string(argv[0]) + " <port>");
+  }
+
+  return std::string(argv[1]);
 }
