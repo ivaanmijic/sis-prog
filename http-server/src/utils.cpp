@@ -4,22 +4,22 @@
 #include <iostream>
 #include <string>
 
-[[noreturn]] void fatal(const std::string &msg) {
-  std::cerr << "[FATAL] " << msg << "\n";
+[[noreturn]] void fatal(const std::string &prefix, const std::string &msg) {
+  std::cerr << prefix << msg << "\n";
   std::cerr.flush();
   std::exit(EXIT_FAILURE);
 }
 
 std::string validateArgs(int argc, char **argv) {
   if (argc < 2) {
-    throw Error::Arg("Error: missing port argument.\n"
-                     "Usage: " +
+    throw Error::Arg("missing port argument.\n"
+                     "Try: " +
                      std::string(argv[0]) + " <port>");
   }
 
   if (argc > 2) {
-    throw Error::Arg("Error: too many arguments\n"
-                     "Usage: " +
+    throw Error::Arg("too many arguments\n"
+                     "Try: " +
                      std::string(argv[0]) + " <port>");
   }
 

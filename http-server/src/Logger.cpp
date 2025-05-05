@@ -1,4 +1,4 @@
-#include "../include/logger.h"
+#include "../include/Logger.h"
 #include <chrono>
 #include <cstdarg>
 #include <cstdio>
@@ -10,7 +10,6 @@
 #include <unistd.h>
 
 #define BUFSIZE 512
-namespace log {
 
 Logger::Logger() {
   fd = open("app.log", O_WRONLY | O_CREAT | O_APPEND, 0666);
@@ -22,6 +21,11 @@ Logger::Logger() {
 Logger::~Logger() {
   if (fd != STDERR_FILENO)
     close(fd);
+}
+
+Logger &Logger::getInstance() {
+  static Logger instance;
+  return instance;
 }
 
 void Logger::log(LogLevel level, const char *file, int line, const char *fmt,
@@ -62,4 +66,3 @@ std::string Logger::logLevelToString(LogLevel level) {
     return "UNKNOWN";
   }
 }
-} // namespace log
