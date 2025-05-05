@@ -1,0 +1,12 @@
+2025-04-27 10:17:16 [INFO] Application started
+2025-04-27 10:17:16 [DEBUG] Some debug detail
+2025-04-27 10:17:16 [ERROR] Something went wrong
+2025-04-27 10:19:53 [INFO] Application started
+2025-04-27 10:19:53 [DEBUG] Some debug detail
+2025-04-27 10:19:53 [ERROR] Something went wrong
+2025-04-27 10:20:50 [INFO] src/main.cpp:4 - Application started
+2025-04-27 10:20:50 [DEBUG] src/main.cpp:5 - Some debug detail
+2025-04-27 10:20:50 [ERROR] src/main.cpp:6 - Something went wrong
+[2025-05-04 11:51:19] src/main.c
+[2025-05-04 11:51:19] src/main.c
+[2025-05-04 11:51:19] src/main.c

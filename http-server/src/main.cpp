@@ -1,8 +1,10 @@
 #include "../include/logger.h"
+#include "../include/utils.h"
+#include <iostream>
+#include <string>
+#include <unistd.h>
 
 int main(int argc, char *argv[]) {
-  LOG_INFO("Application started");
-  LOG_DEBUG("Some debug detail");
-  LOG_ERROR("Something went wrong");
-  return 0;
+  if (!isValidPort(argv[1]))
+    fatal("Invalid port number");
 }
