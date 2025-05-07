@@ -1,7 +1,7 @@
-#include "../include/HttpServer.h"
+#include "../include/Error.h"
+#include "../include/HTTPServer.h"
 #include "../include/Port.h"
-#include "../include/error.h"
-#include "../include/utils.h"
+#include "../include/Utils.h"
 #include <string>
 #include <unistd.h>
 
@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
     std::string portArg(validateArgs(argc, argv));
     Port port(portArg);
 
-    HTTPServer server{port};
+    http::HTTPServer server{port};
     server.init();
     server.listenAndServe();
 

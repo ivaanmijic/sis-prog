@@ -1,6 +1,146 @@
-2025-05-05 21:54:57 [INFO] src/http_server.cpp:82 - Listening on port 8080...
-2025-05-05 21:55:04 [INFO] src/http_server.cpp:120 - Accepted new connection from: 127.0.0.1
-2025-05-05 21:55:04 [INFO] src/http_server.cpp:98 - Serving client
-2025-05-05 21:55:10 [INFO] src/http_server.cpp:120 - Accepted new connection from: 127.0.0.1
-2025-05-05 21:55:10 [INFO] src/http_server.cpp:98 - Serving client
-2025-05-05 22:25:13 [INFO] src/HttpServer.cpp:80 - Listening on port 8080...
+2025-05-06 20:53:54 [INFO] src/HTTPServer.cpp:123 - Accepted new connection from: 127.0.0.1
+2025-05-06 20:53:54 [INFO] src/HTTPServer.cpp:100 - Serving client
+2025-05-06 20:54:02 [ERROR] src/HTTPServer.cpp:138 - Error reading
+2025-05-06 20:55:29 [INFO] src/HTTPServer.cpp:85 - Listening on port 8080...
+2025-05-06 20:55:54 [INFO] src/HTTPServer.cpp:85 - Listening on port 8080...
+2025-05-06 20:56:08 [INFO] src/HTTPServer.cpp:123 - Accepted new connection from: 127.0.0.1
+2025-05-06 20:56:08 [INFO] src/HTTPServer.cpp:100 - Serving client
+2025-05-06 20:57:05 [ERROR] src/HTTPServer.cpp:138 - Error reading
+2025-05-06 20:57:12 [INFO] src/HTTPServer.cpp:123 - Accepted new connection from: 127.0.0.1
+2025-05-06 20:57:12 [INFO] src/HTTPServer.cpp:100 - Serving client
+2025-05-06 20:57:21 [ERROR] src/HTTPServer.cpp:138 - Error reading
+2025-05-06 20:57:37 [INFO] src/HTTPServer.cpp:85 - Listening on port 8080...
+2025-05-06 20:57:48 [INFO] src/HTTPServer.cpp:123 - Accepted new connection from: 127.0.0.1
+2025-05-06 20:57:48 [INFO] src/HTTPServer.cpp:100 - Serving client
+2025-05-06 20:58:16 [ERROR] src/HTTPServer.cpp:138 - Error reading
+2025-05-06 20:58:18 [INFO] src/HTTPServer.cpp:123 - Accepted new connection from: 127.0.0.1
+2025-05-06 20:58:18 [INFO] src/HTTPServer.cpp:100 - Serving client
+2025-05-06 20:58:20 [ERROR] src/HTTPServer.cpp:138 - Error reading
+2025-05-06 20:58:33 [INFO] src/HTTPServer.cpp:85 - Listening on port 8080...
+2025-05-06 20:58:47 [INFO] src/HTTPServer.cpp:123 - Accepted new connection from: 127.0.0.1
+2025-05-06 20:58:47 [INFO] src/HTTPServer.cpp:100 - Serving client
+2025-05-06 20:58:53 [INFO] src/HTTPServer.cpp:123 - Accepted new connection from: 127.0.0.1
+2025-05-06 20:58:53 [INFO] src/HTTPServer.cpp:100 - Serving client
+2025-05-06 20:58:55 [ERROR] src/HTTPServer.cpp:138 - Error reading
+2025-05-06 20:58:57 [ERROR] src/HTTPServer.cpp:138 - Error reading
+2025-05-06 20:59:41 [INFO] src/HTTPServer.cpp:85 - Listening on port 8080...
+2025-05-06 20:59:50 [INFO] src/HTTPServer.cpp:123 - Accepted new connection from: 127.0.0.1
+2025-05-06 20:59:50 [INFO] src/HTTPServer.cpp:100 - Serving client
+2025-05-06 21:01:06 [INFO] src/HTTPServer.cpp:86 - Listening on port 8080...
+2025-05-06 21:01:17 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:01:17 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:01:28 [ERROR] src/HTTPServer.cpp:140 - Error reading
+2025-05-06 21:01:28 [INFO] src/HTTPServer.cpp:145 - HTTP/1.1 500 Internal server error
+Content-Type: text/plain
+
+
+2025-05-06 21:01:28 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:02:47 [INFO] src/HTTPServer.cpp:86 - Listening on port 8080...
+2025-05-06 21:03:02 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:03:02 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:03:02 [ERROR] src/HTTPServer.cpp:143 - Error reading
+2025-05-06 21:03:02 [INFO] src/HTTPServer.cpp:148 - HTTP/1.1 500 Internal server error
+Content-Type: text/plain
+
+
+2025-05-06 21:03:02 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:30:38 [INFO] src/HTTPServer.cpp:86 - Listening on port 8080...
+2025-05-06 21:30:49 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:30:49 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:31:06 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:31:06 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:31:11 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:31:11 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:31:12 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:31:12 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:31:13 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:31:13 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:32:33 [INFO] src/HTTPServer.cpp:86 - Listening on port 8080...
+2025-05-06 21:32:39 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:32:39 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:32:39 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:32:49 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:32:49 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:32:49 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:32:52 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:32:52 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:32:52 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:32:53 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:32:53 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:32:53 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:32:54 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:32:54 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:32:54 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:32:55 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:32:55 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:32:55 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:32:55 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:32:55 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:32:55 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:34:22 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:34:22 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:34:22 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:34:27 [INFO] src/HTTPServer.cpp:86 - Listening on port 8080...
+2025-05-06 21:34:35 [INFO] src/HTTPServer.cpp:86 - Listening on port 8080...
+2025-05-06 21:34:52 [INFO] src/HTTPServer.cpp:86 - Listening on port 8080...
+2025-05-06 21:35:15 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:35:15 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:35:15 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:35:41 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:35:41 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:35:41 [WARNING] src/HTTPServer.cpp:156 - Invalid HTTP Request: 403 Forbbiden
+2025-05-06 21:35:41 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:35:54 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:35:54 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:35:54 [WARNING] src/HTTPServer.cpp:156 - Invalid HTTP Request: 403 Forbbiden
+2025-05-06 21:35:54 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:35:58 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:35:58 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:35:58 [WARNING] src/HTTPServer.cpp:156 - Invalid HTTP Request: 403 Forbbiden
+2025-05-06 21:35:58 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:36:01 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:36:01 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:36:01 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:38:36 [INFO] src/HTTPServer.cpp:86 - Listening on port 8080...
+2025-05-06 21:38:38 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:38:38 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:38:38 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:38:58 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:38:58 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:38:58 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:39:13 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:39:13 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:39:13 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:39:21 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:39:21 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:39:21 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:40:10 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:40:10 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:40:10 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:40:59 [INFO] src/HTTPServer.cpp:86 - Listening on port 8080...
+2025-05-06 21:41:27 [INFO] src/HTTPServer.cpp:86 - Listening on port 8080...
+2025-05-06 21:41:36 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:41:36 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:41:36 [WARNING] src/HTTPServer.cpp:156 - Invalid HTTP Request: 403 Forbidden
+2025-05-06 21:41:36 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:41:42 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:41:42 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:41:42 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:41:56 [INFO] src/HTTPServer.cpp:125 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:41:56 [INFO] src/HTTPServer.cpp:101 - Serving client
+2025-05-06 21:41:56 [INFO] src/HTTPServer.cpp:104 - SErviro sam ga
+2025-05-06 21:55:17 [INFO] src/HTTPServer.cpp:85 - Listening on port 8080...
+2025-05-06 21:55:33 [INFO] src/HTTPServer.cpp:124 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:55:33 [INFO] src/HTTPServer.cpp:100 - Serving client
+2025-05-06 21:55:33 [INFO] src/HTTPServer.cpp:103 - SErviro sam ga
+2025-05-06 21:55:44 [INFO] src/HTTPServer.cpp:124 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:55:44 [INFO] src/HTTPServer.cpp:100 - Serving client
+2025-05-06 21:55:44 [WARNING] src/HTTPServer.cpp:156 - Invalid HTTP Request: 403 Forbidden
+2025-05-06 21:55:44 [INFO] src/HTTPServer.cpp:103 - SErviro sam ga
+2025-05-06 21:55:48 [INFO] src/HTTPServer.cpp:124 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:55:48 [INFO] src/HTTPServer.cpp:100 - Serving client
+2025-05-06 21:55:48 [WARNING] src/HTTPServer.cpp:156 - Invalid HTTP Request: 403 Forbidden
+2025-05-06 21:55:48 [INFO] src/HTTPServer.cpp:103 - SErviro sam ga
+2025-05-06 21:56:21 [INFO] src/HTTPServer.cpp:124 - Accepted new connection from: 127.0.0.1
+2025-05-06 21:56:21 [INFO] src/HTTPServer.cpp:100 - Serving client
+2025-05-06 21:56:21 [INFO] src/HTTPServer.cpp:103 - SErviro sam ga

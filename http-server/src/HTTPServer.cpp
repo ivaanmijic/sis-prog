@@ -1,12 +1,15 @@
-#include "../include/HttpServer.h"
+#include "../include/HTTPServer.h"
+#include "../include/Error.h"
 #include "../include/Logger.h"
-#include "../include/error.h"
 
 #include <arpa/inet.h>
 #include <cerrno>
+#include <cmath>
 #include <csignal>
+#include <cstddef>
 #include <cstdlib>
 #include <cstring>
+#include <exception>
 #include <netinet/in.h>
 #include <string>
 #include <sys/socket.h>
@@ -14,6 +17,8 @@
 #include <unistd.h>
 #include <utility>
 #include <wait.h>
+
+namespace http {
 
 HTTPServer::HTTPServer(const Port &p) : port(p), serverSocket(-1) {}
 
@@ -92,9 +97,10 @@ void HTTPServer::serve() {
       LOG_ERROR("fork failure: %s", std::strerror(errno));
       continue;
     } else if (pid == 0) {
-      close(serverSocket.get());
       LOG_INFO("Serving client");
-      close(clientSocket.get());
+      close(serverSocket.get());
+      handleConnection(clientSocket);
+      LOG_INFO("SErviro sam ga");
       _exit(EXIT_SUCCESS);
     }
   }
@@ -119,6 +125,59 @@ Socket HTTPServer::acceptConnection() {
   return Socket{clientFd};
 }
 
+void HTTPServer::handleConnection(Socket &clientSocket) {
+  constexpr size_t BUFSIZE = 4096;
+  char buffer[BUFSIZE];
+  std::string requestPayload;
+  ssize_t bytesRead;
+
+  while ((bytesRead = read(clientSocket.get(), buffer, BUFSIZE - 1)) > 0) {
+    requestPayload.append(buffer, bytesRead);
+    if (requestPayload.find("\r\n\r\n") != std::string::npos) {
+      break;
+    }
+  }
+
+  if (bytesRead < 0) {
+    LOG_ERROR("Error reading");
+    sendError(clientSocket.get(), 500, "Internal Server Error");
+    return;
+  }
+
+  HTTPResponse resp;
+
+  try {
+    HTTPRequest req = HTTPRequest::parse(requestPayload);
+    // TODO: - Server logic
+  }
+
+  catch (const Error::HTTPWithStatus &e) {
+    LOG_WARNING("Invalid HTTP Request: %d %s", e.status,
+                std::string(e.what()).c_str());
+    sendError(clientSocket.get(), e.status, e.what());
+  }
+
+  catch (const std::exception &e) {
+    LOG_ERROR("Unexpected error: %s", std::string(e.what()).c_str());
+    sendError(clientSocket.get(), 500, "Internal Server Error");
+  }
+}
+
+void HTTPServer::sendError(int sockFd, int status, const std::string &reason,
+                           const std::string &body) {
+  HTTPResponse resp(status, reason);
+  resp.addHeader("Content-Type", "text/plain");
+  resp.setBody(body);
+  sendResponse(sockFd, resp);
+}
+
+void HTTPServer::sendResponse(int sockFd, const HTTPResponse &resp) {
+  std::string out = resp.toString();
+  write(sockFd, out.c_str(), out.length());
+}
+
 void HTTPServer::throwErrno(const std::string &what) {
   throw Error::HTTP(what + ": " + std::string(std::strerror(errno)));
 }
+
+}; // namespace http

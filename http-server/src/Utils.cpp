@@ -1,5 +1,5 @@
-#include "../include/utils.h"
-#include "../include/error.h"
+#include "../include/Utils.h"
+#include "../include/Error.h"
 #include <cstdlib>
 #include <iostream>
 #include <string>
