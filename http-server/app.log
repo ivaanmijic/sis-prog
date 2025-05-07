@@ -144,3 +144,69 @@ Content-Type: text/plain
 2025-05-06 21:56:21 [INFO] src/HTTPServer.cpp:124 - Accepted new connection from: 127.0.0.1
 2025-05-06 21:56:21 [INFO] src/HTTPServer.cpp:100 - Serving client
 2025-05-06 21:56:21 [INFO] src/HTTPServer.cpp:103 - SErviro sam ga
+2025-05-07 09:23:31 [INFO] src/HTTPServer.cpp:100 - Listening on port 8080...
+2025-05-07 09:23:50 [INFO] src/HTTPServer.cpp:139 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:23:50 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:23:50 [WARNING] src/HTTPServer.cpp:170 - Invalid HTTP Request: 404 Not Found
+2025-05-07 09:23:50 [INFO] src/HTTPServer.cpp:118 - SErviro sam ga
+2025-05-07 09:28:11 [INFO] src/HTTPServer.cpp:100 - Listening on port 8080...
+2025-05-07 09:28:16 [INFO] src/HTTPServer.cpp:139 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:28:16 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:28:16 [INFO] src/HTTPServer.cpp:118 - SErviro sam ga
+2025-05-07 09:29:19 [INFO] src/HTTPServer.cpp:100 - Listening on port 8080...
+2025-05-07 09:29:27 [INFO] src/HTTPServer.cpp:139 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:29:27 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:29:27 [INFO] src/HTTPServer.cpp:118 - SErviro sam ga
+2025-05-07 09:30:19 [INFO] src/HTTPServer.cpp:100 - Listening on port 8080...
+2025-05-07 09:30:23 [INFO] src/HTTPServer.cpp:139 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:30:23 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:30:23 [INFO] src/HTTPServer.cpp:118 - SErviro sam ga
+2025-05-07 09:31:56 [INFO] src/HTTPServer.cpp:100 - Listening on port 8080...
+2025-05-07 09:32:04 [INFO] src/HTTPServer.cpp:139 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:32:04 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:32:04 [INFO] src/HTTPServer.cpp:118 - SErviro sam ga
+2025-05-07 09:33:29 [INFO] src/HTTPServer.cpp:100 - Listening on port 8080...
+2025-05-07 09:33:35 [INFO] src/HTTPServer.cpp:138 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:33:35 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:33:35 [DEBUG] src/HTTPServer.cpp:188 - tu sam
+2025-05-07 09:34:40 [INFO] src/HTTPServer.cpp:100 - Listening on port 8080...
+2025-05-07 09:34:50 [INFO] src/HTTPServer.cpp:138 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:34:50 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:34:50 [DEBUG] src/HTTPServer.cpp:188 - tu sam
+2025-05-07 09:34:50 [DEBUG] src/Utils.cpp:72 - #
+2025-05-07 09:37:24 [INFO] src/HTTPServer.cpp:100 - Listening on port 8080...
+2025-05-07 09:37:27 [INFO] src/HTTPServer.cpp:138 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:37:27 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:37:27 [DEBUG] src/HTTPServer.cpp:188 - tu sam
+2025-05-07 09:37:48 [INFO] src/HTTPServer.cpp:138 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:37:48 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:37:48 [DEBUG] src/HTTPServer.cpp:188 - tu sam
+2025-05-07 09:37:52 [INFO] src/HTTPServer.cpp:138 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:37:52 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:37:52 [DEBUG] src/HTTPServer.cpp:188 - tu sam
+2025-05-07 09:38:07 [INFO] src/HTTPServer.cpp:138 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:38:07 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:38:07 [DEBUG] src/HTTPServer.cpp:188 - tu sam
+2025-05-07 09:38:07 [WARNING] src/HTTPServer.cpp:169 - Invalid HTTP Request: 404 Not Found
+2025-05-07 09:38:17 [INFO] src/HTTPServer.cpp:138 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:38:17 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:38:17 [DEBUG] src/HTTPServer.cpp:188 - tu sam
+2025-05-07 09:38:20 [INFO] src/HTTPServer.cpp:138 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:38:20 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:38:20 [DEBUG] src/HTTPServer.cpp:188 - tu sam
+2025-05-07 09:43:32 [INFO] src/HTTPServer.cpp:100 - Listening on port 8080...
+2025-05-07 09:43:35 [INFO] src/HTTPServer.cpp:138 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:43:35 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:43:44 [INFO] src/HTTPServer.cpp:138 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:43:44 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:44:05 [INFO] src/HTTPServer.cpp:138 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:44:05 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:44:05 [WARNING] src/HTTPServer.cpp:169 - Invalid HTTP Request: 404 Not Found
+2025-05-07 09:44:21 [INFO] src/HTTPServer.cpp:138 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:44:21 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:45:18 [INFO] src/HTTPServer.cpp:138 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:45:18 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:45:24 [INFO] src/HTTPServer.cpp:138 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:45:24 [INFO] src/HTTPServer.cpp:115 - Serving client
+2025-05-07 09:45:40 [INFO] src/HTTPServer.cpp:138 - Accepted new connection from: 127.0.0.1
+2025-05-07 09:45:40 [INFO] src/HTTPServer.cpp:115 - Serving client

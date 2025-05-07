@@ -1,6 +1,7 @@
 #include "../include/HTTPServer.h"
 #include "../include/Error.h"
 #include "../include/Logger.h"
+#include "../include/Utils.h"
 
 #include <arpa/inet.h>
 #include <cerrno>
@@ -12,13 +13,42 @@
 #include <exception>
 #include <netinet/in.h>
 #include <string>
+#include <strings.h>
 #include <sys/socket.h>
+#include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <utility>
+#include <vector>
 #include <wait.h>
 
 namespace http {
+
+static inline void throwStatusOnErrno() {
+  switch (errno) {
+  case ENOENT:
+    throw Error::HTTPWithStatus(404, "Not Found");
+  case EACCES:
+    throw Error::HTTPWithStatus(403, "Forbidden");
+  default:
+    throw Error::HTTPWithStatus(400, "Bad Request");
+  }
+}
+
+static inline bool isHTML(const std::string &path) {
+  const std::string suffix = ".html";
+  if (path.size() < suffix.size())
+    return false;
+
+  for (size_t i = 0; i < suffix.size(); ++i) {
+    char a = std::tolower(
+        static_cast<unsigned char>(path[path.size() - suffix.size() + i]));
+    char b = suffix[i];
+    if (a != b)
+      return false;
+  }
+  return true;
+}
 
 HTTPServer::HTTPServer(const Port &p) : port(p), serverSocket(-1) {}
 
@@ -100,7 +130,6 @@ void HTTPServer::serve() {
       LOG_INFO("Serving client");
       close(serverSocket.get());
       handleConnection(clientSocket);
-      LOG_INFO("SErviro sam ga");
       _exit(EXIT_SUCCESS);
     }
   }
@@ -144,11 +173,10 @@ void HTTPServer::handleConnection(Socket &clientSocket) {
     return;
   }
 
-  HTTPResponse resp;
-
   try {
     HTTPRequest req = HTTPRequest::parse(requestPayload);
-    // TODO: - Server logic
+    HTTPResponse resp{handleRequest(req)};
+    sendResponse(clientSocket.get(), resp);
   }
 
   catch (const Error::HTTPWithStatus &e) {
@@ -163,6 +191,55 @@ void HTTPServer::handleConnection(Socket &clientSocket) {
   }
 }
 
+HTTPResponse HTTPServer::handleRequest(const HTTPRequest &req) const {
+  std::string path = req.getEndpoint();
+  struct stat statBuffer;
+
+  path.erase(0, 1);
+  if (path.empty()) {
+    path = ".";
+  }
+
+  std::vector<const char *> argv;
+  std::string execOut;
+  std::string contentType;
+
+  if (stat(path.c_str(), &statBuffer) < 0) {
+    throwStatusOnErrno();
+  }
+
+  if (S_ISREG(statBuffer.st_mode)) {
+    argv = {"cat", path.c_str(), nullptr};
+    execOut = execute(argv);
+    contentType = isHTML(path) ? "text/html" : "application/octet-stream";
+  }
+
+  else if (S_ISDIR(statBuffer.st_mode)) {
+    std::string indexPath = path + "/index.html";
+
+    if (stat(indexPath.c_str(), &statBuffer) == 0 &&
+        S_ISREG(statBuffer.st_mode)) {
+      argv = {"cat", indexPath.c_str(), nullptr};
+      execOut = execute(argv);
+      contentType = "text/html";
+    }
+
+    else {
+      argv = {"ls", "-l", path.c_str(), nullptr};
+      execOut = execute(argv);
+      contentType = "application/octet-stream";
+    }
+  }
+
+  else {
+    throw Error::HTTPWithStatus(403, "Forbidden");
+  }
+
+  HTTPResponse resp;
+  resp.addHeader("Content-Type", contentType);
+  resp.setBody(execOut);
+  return resp;
+}
 void HTTPServer::sendError(int sockFd, int status, const std::string &reason,
                            const std::string &body) {
   HTTPResponse resp(status, reason);

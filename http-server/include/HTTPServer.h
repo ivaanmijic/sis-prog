@@ -35,6 +35,7 @@ private:
 
   void handleConnection(Socket &clinetSock);
 
+  HTTPResponse handleRequest(const HTTPRequest &req) const;
   void sendError(int sockFd, int status, const std::string &reason,
                  const std::string &body = "");
   void sendResponse(int sockFd, const HTTPResponse &resp);
