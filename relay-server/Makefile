@@ -1,19 +1,19 @@
-CXX      := clang
+CXX      := clang++
 CXXFLAGS := -Wall -fsanitize=address
 LDFLAGS  := -L /usr/lib -lm
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/obj
 BIN_DIR  := $(BUILD)/bin
-TARGET   := server
+TARGET   := relay-server
 INCLUDE  := -Iinclude/
-SRC      := $(wildcard ./src/*.c)
+SRC      := $(wildcard ./src/*.cpp)
 
-OBJECTS  := $(SRC:%.c=$(OBJ_DIR)/%.o)
+OBJECTS  := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 DEPS 		 := $(OBJECTS:.o=.d)
 
 all: build $(BIN_DIR)/$(TARGET)
 
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/%.o: %.cpp
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -MMD -o $@
 
