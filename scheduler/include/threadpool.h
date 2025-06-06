@@ -14,8 +14,8 @@ public:
   ThreadPool(size_t num_threads = std::thread::hardware_concurrency());
   ~ThreadPool();
 
-  void enqueue(Task task);
-  void enqueue(int priority, std::function<void()> func);
+  void enqueue(Task &&task);
+  // void enqueue(int priority, std::function<void()> func);
 
 private:
   std::vector<std::thread> threads_;
@@ -23,5 +23,5 @@ private:
 
   std::mutex queue_mutex_;
   std::condition_variable cv_;
-  std::atomic<bool> stop{false};
+  std::atomic<bool> stop_;
 };
