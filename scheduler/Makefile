@@ -4,7 +4,7 @@ LDFLAGS  := -L /usr/lib -lm
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/obj
 BIN_DIR  := $(BUILD)/bin
-TARGET   := relay-server
+TARGET   := scheduler
 INCLUDE  := -Iinclude/
 SRC      := $(wildcard ./src/*.cpp)
 
