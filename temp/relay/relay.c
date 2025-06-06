@@ -1,0 +1,171 @@
+#include <asm-generic/errno-base.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <netinet/in.h>
+#include <signal.h>
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/select.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <wait.h>
+
+#define FIFO "relay_fifo"
+#define KBACKLOG 10
+#define TRUE 1
+
+void sigchld_handler(int sig) {
+  while (waitpid(-1, NULL, WNOHANG) > 0)
+    ;
+}
+
+void fatal(const char *msg) {
+  perror(msg);
+  exit(EXIT_FAILURE);
+}
+
+int main(void) {
+  int pipeFd[2];
+
+  struct sigaction sa;
+  sa.sa_handler = sigchld_handler;
+  sigemptyset(&sa.sa_mask);
+  sa.sa_flags = SA_RESTART;
+  if (sigaction(SIGCHLD, &sa, 0) < 0)
+    fatal("sigaction failure");
+
+  // creating pipe
+  if (pipe(pipeFd) == -1)
+    fatal("pipe failure");
+
+  // create fifo
+  unlink(FIFO);
+  if (mkfifo(FIFO, 0666) == -1 && errno != EEXIST) {
+    close(pipeFd[0]);
+    close(pipeFd[1]);
+    fatal("mkfifo failure");
+  }
+
+  // fork reciever
+  pid_t rpid = fork();
+  if (rpid == 0) {
+    close(pipeFd[1]);
+    char buf[BUFSIZ];
+    size_t nread;
+    while ((nread = read(pipeFd[0], buf, BUFSIZ)) > 0) {
+      write(STDOUT_FILENO, buf, nread);
+    }
+    exit(EXIT_SUCCESS);
+  }
+  close(pipeFd[0]);
+
+  // fork logger
+  int loggerFd =
+      open("logger.log", O_WRONLY | O_CREAT | O_SYNC | O_APPEND, 0666);
+  if (loggerFd < 0) {
+    close(pipeFd[1]);
+    unlink(FIFO);
+    fatal("logger open failure");
+  }
+
+  pid_t lpid = fork();
+  if (lpid == 0) {
+    int fd = open(FIFO, O_RDONLY);
+    char buf[BUFSIZ];
+    size_t nread;
+    while ((nread = read(fd, buf, BUFSIZ)) > 0) {
+      write(loggerFd, buf, nread);
+    }
+    exit(EXIT_SUCCESS);
+  }
+
+  // create socket
+  int listenerFd = socket(AF_INET, SOCK_STREAM, 0);
+  if (listenerFd < 0) {
+    close(pipeFd[1]);
+    close(loggerFd);
+    unlink(FIFO);
+    fatal("socket error");
+  }
+
+  int opt = -1;
+  if (setsockopt(listenerFd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt,
+                 sizeof(opt)) < 0) {
+    close(pipeFd[1]);
+    close(listenerFd);
+    close(loggerFd);
+    unlink(FIFO);
+    fatal("setsockopt failure");
+  }
+
+  struct sockaddr_in addr_in;
+  memset(&addr_in, 0, sizeof(addr_in));
+  addr_in.sin_family = AF_INET;
+  addr_in.sin_addr.s_addr = INADDR_ANY;
+  addr_in.sin_port = htons(8080);
+
+  if (bind(listenerFd, (struct sockaddr *)&addr_in, sizeof(addr_in)) < 0) {
+    close(pipeFd[1]);
+    close(listenerFd);
+    close(loggerFd);
+    unlink(FIFO);
+    fatal("bind failure");
+  }
+
+  // listen
+  listen(listenerFd, KBACKLOG);
+
+  // Open FIFO
+  int fifoFd = open(FIFO, O_RDWR | O_NONBLOCK);
+  if (fifoFd < 0) {
+    fatal("Failed to open FIFO");
+  }
+
+  // prepare for select
+  fd_set master_set, read_set;
+  FD_ZERO(&master_set);
+  FD_SET(listenerFd, &master_set);
+  int max_fd = listenerFd;
+
+  while (TRUE) {
+    read_set = master_set;
+    if (select(max_fd + 1, &read_set, NULL, NULL, NULL) < 0 && errno != EINTR) {
+      fatal("select failure");
+    }
+
+    for (int fd = 0; fd <= max_fd; ++fd) {
+      if (!FD_ISSET(fd, &read_set))
+        continue;
+
+      if (fd == listenerFd) {
+        int clientFd = accept(listenerFd, NULL, NULL);
+        if (clientFd < 0)
+          continue;
+        FD_SET(clientFd, &master_set);
+        max_fd = clientFd > max_fd ? clientFd : max_fd;
+      }
+
+      else {
+        char buf[BUFSIZ];
+        size_t nread = read(fd, buf, BUFSIZ);
+        if (nread < 0) {
+          close(fd);
+          FD_CLR(fd, &master_set);
+        } else {
+          write(pipeFd[1], buf, nread);
+          int loggerFd = open(FIFO, O_RDWR | O_NONBLOCK);
+          if (loggerFd >= 0) {
+            write(loggerFd, buf, nread);
+            close(loggerFd);
+          }
+        }
+      }
+    }
+  }
+
+  return EXIT_SUCCESS;
+}

@@ -175,7 +175,7 @@ void RelayServer::handleClientData(int clientFd, fd_set &masterSet) {
   } else {
     write(pipeFd[1], buf, nbytes);
     int loggerFd = open(fifoPath.c_str(), O_WRONLY | O_NONBLOCK);
-    if (loggerFd >= 9) {
+    if (loggerFd >= 0) {
       write(loggerFd, buf, nbytes);
       close(loggerFd);
     }
